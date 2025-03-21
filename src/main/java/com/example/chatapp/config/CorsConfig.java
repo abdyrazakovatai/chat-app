@@ -15,7 +15,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("http://localhost:9191")  // Указываем разрешенные источники
+//                        .allowedOriginPatterns("http://localhost:9191")
+                        .allowedOriginPatterns("https://my-websocket-chat-545a0987aa03.herokuapp.com/chat/info?t=1742392721633")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowCredentials(true)
                         .allowedHeaders("*");
