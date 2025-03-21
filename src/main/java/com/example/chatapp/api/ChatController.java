@@ -52,7 +52,7 @@ public class ChatController {
             throw new NotfoundException("User with ID " + messageDto.getUserId() + " not found");
         }
         if (user.getName() == null) {
-            user.setName(messageDto.getSender()); // Используем sender как запасной вариант
+            user.setName(messageDto.getSender());
         }
 
         message.setUser(user);

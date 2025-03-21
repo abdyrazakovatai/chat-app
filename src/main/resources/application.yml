@@ -16,6 +16,6 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: ${PORT:9393}
+  port: ${PORT:9595}
   error:
     include-message: always

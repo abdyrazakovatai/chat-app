@@ -76,11 +76,9 @@
 //     if (e.key === 'Enter') sendMessage();
 // });
 
-import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 console.log("index.js загружен!");
-// const socket = new SockJS('http://localhost:9090/chat');
 const socket = new SockJS('https://my-websocket-chat.herokuapp.com/chat');
 const stompClient = StompJs.Stomp.over(socket);
 

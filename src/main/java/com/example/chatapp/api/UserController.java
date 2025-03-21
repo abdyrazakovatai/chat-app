@@ -1,7 +1,6 @@
 package com.example.chatapp.api;
 
 import com.example.chatapp.entity.User;
-import com.example.chatapp.service.ChatService;
 import com.example.chatapp.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,7 @@ public class UserController {
     @GetMapping("/register")
     public String signUp(@ModelAttribute User user, Model model) {
         model.addAttribute("user",user);
-        return "signUp";
+        return "register";
     }
 
     @PostMapping("/save")
