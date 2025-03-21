@@ -5,11 +5,13 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres.cudwuwgftqghyrwkbveg}
     password: ${SPRING_DATASOURCE_PASSWORD:atai123atai}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
 
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
