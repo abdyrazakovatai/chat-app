@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final ChatService chatService;
 
     @GetMapping("/users")
     public String getAll(Model model) {

@@ -80,7 +80,8 @@ import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 console.log("index.js загружен!");
-const socket = new SockJS('http://localhost:9090/chat');
+// const socket = new SockJS('http://localhost:9090/chat');
+const socket = new SockJS('http://my-websocket-chat-545a0987aa03.herokuapp.com/chat/info?t=1742392721633');
 const stompClient = StompJs.Stomp.over(socket);
 
 // Глобальные переменные
