@@ -32,7 +32,7 @@ public class ChatController {
     }
 
     @Transactional
-    @MessageMapping("/sendMessage")
+    @MessageMapping("/send")
     @SendTo("/topic/messages")
     public Message sendMessage(MessageDto messageDto) {
         Message message = new Message();
