@@ -98,42 +98,50 @@
 //     isWindowFocused = false;
 // });
 
-const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
-const stompClient = window.Stomp.over(socket);
-
-let unreadCount = 0;
-const currentUserId = 1; // Замените на реальный ID текущего пользователя
-
-stompClient.connect({}, function (frame) {
-    console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/messages', function (message) {
-        const msg = JSON.parse(message.body);
-        showMessage(msg.content, msg.user.id === currentUserId);
-    });
-}, function (error) {
-    console.error('Connection error: ' + error);
-});
-
-document.getElementById('sendMessageButton').addEventListener('click', function () {
-    const content = document.getElementById('messageInput').value;
-    if (content.trim()) {
-        stompClient.send('/app/send', {}, JSON.stringify({
-            content: content,
-            chatId: 1, // Замените на реальный chatId
-            userId: currentUserId,
-            sender: 'User' // Замените на реальное имя
-        }));
-        document.getElementById('messageInput').value = '';
+window.onload = function () {
+    console.log("Stomp.Js: ", window.Stomp);
+    if (!window.Stomp) {
+        console.error("Stomp.js failed to load!");
+        return;
     }
-});
 
-function showMessage(content, isUserMessage) {
-    const messagesDiv = document.getElementById('messages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'message ' + (isUserMessage ? 'user-message' : 'friend-message');
-    messageDiv.innerHTML = '<span class="sender">' + (isUserMessage ? 'Вы' : 'Друг') + '</span>' + content;
-    messagesDiv.appendChild(messageDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    unreadCount++;
-    document.getElementById('unreadCounter').textContent = '(' + unreadCount + ')';
+    const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
+    const stompClient = window.Stomp.over(socket);
+
+    let unreadCount = 0;
+    const currentUserId = 1; // Замените на реальный ID текущего пользователя
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/messages', function (message) {
+            const msg = JSON.parse(message.body);
+            showMessage(msg.content, msg.user.id === currentUserId);
+        });
+    }, function (error) {
+        console.error('Connection error: ' + error);
+    });
+
+    document.getElementById('sendMessageButton').addEventListener('click', function () {
+        const content = document.getElementById('messageInput').value;
+        if (content.trim()) {
+            stompClient.send('/app/send', {}, JSON.stringify({
+                content: content,
+                chatId: 1, // Замените на реальный chatId
+                userId: currentUserId,
+                sender: 'User' // Замените на реальное имя
+            }));
+            document.getElementById('messageInput').value = '';
+        }
+    });
+
+    function showMessage(content, isUserMessage) {
+        const messagesDiv = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message ' + (isUserMessage ? 'user-message' : 'friend-message');
+        messageDiv.innerHTML = '<span class="sender">' + (isUserMessage ? 'Вы' : 'Друг') + '</span>' + content;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        unreadCount++;
+        document.getElementById('unreadCounter').textContent = '(' + unreadCount + ')';
+    }
 }
