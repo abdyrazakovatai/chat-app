@@ -99,7 +99,7 @@
 // });
 
 const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
-const stompClient = Stomp.over(socket);
+const stompClient = window.Stomp.over(socket);
 
 let unreadCount = 0;
 const currentUserId = 1; // Замените на реальный ID текущего пользователя
