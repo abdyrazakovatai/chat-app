@@ -108,6 +108,8 @@ window.onload = function () {
     const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
     const stompClient = window.Stomp.over(socket);
 
+    console.log("stompClient: ", stompClient);
+
     let unreadCount = 0;
     const currentUserId = 1; // Замените на реальный ID текущего пользователя
 
