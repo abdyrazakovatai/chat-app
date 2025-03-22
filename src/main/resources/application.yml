@@ -1,21 +1,41 @@
-spring:
+#spring:
+#
+#  datasource:
+#    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres}
+#    username: ${SPRING_DATASOURCE_USERNAME:postgres.cudwuwgftqghyrwkbveg}
+#    password: ${SPRING_DATASOURCE_PASSWORD:atai123atai}
+#    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      maximum-pool-size: 5
+#
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    format_sql: true
+#    open-in-view: false
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#
+#server:
+#  port: ${PORT:9797}
+#  error:
+#    include-message: always
 
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true  # Форматирует SQL для читаемости
+        use_sql_comments: true  # Добавляет комментарии к запросам
+    hibernate:
+      ddl-auto: update  # Убедитесь, что таблицы создаются автоматически
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres}
     username: ${SPRING_DATASOURCE_USERNAME:postgres.cudwuwgftqghyrwkbveg}
     password: ${SPRING_DATASOURCE_PASSWORD:atai123atai}
     driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 5
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create
-    open-in-view: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-
-server:
-  port: ${PORT:9595}
-  error:
-    include-message: always
+logging:
+  level:
+    org.hibernate.SQL: DEBUG  # Выводит сами SQL-запросы
+    org.hibernate.type.descriptor.sql: TRACE  # Выводит параметры запросов (bind values)
