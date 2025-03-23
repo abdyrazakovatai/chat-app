@@ -98,6 +98,9 @@
 //     isWindowFocused = false;
 // });
 
+// import SockJS from "sockjs-client";
+// import { Client } from "@stomp/stompjs";
+
 window.onload = function () {
     console.log("Stomp.Js: ", window.Stomp);
     if (!window.Stomp) {
@@ -105,10 +108,13 @@ window.onload = function () {
         return;
     }
 
-    const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
+    const socket = new SockJS("https://my-websocket-chat-545a0987aa03.herokuapp.com");
     const stompClient = window.Stomp.over(socket);
 
-    console.log("stompClient: ", stompClient);
+    console.log("Stomp.Client: ", stompClient);
+
+    // const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
+    // const stompClient = window.Stomp.over(socket);
 
     let unreadCount = 0;
     const currentUserId = 1; // Замените на реальный ID текущего пользователя
