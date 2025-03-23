@@ -101,29 +101,83 @@
 // import SockJS from "sockjs-client";
 // import { Client } from "@stomp/stompjs";
 
+// window.onload = function () {
+//     console.log("Stomp.Js: ", window.Stomp);
+//     if (!window.Stomp) {
+//         console.error("Stomp.js failed to load!");
+//         return;
+//     }
+//
+//     const socket = new SockJS("https://my-websocket-chat-545a0987aa03.herokuapp.com");
+//     const stompClient = window.Stomp.over(socket);
+//
+//     console.log("Stomp.Client: ", stompClient);
+//
+//     // const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
+//     // const stompClient = window.Stomp.over(socket);
+//
+//     let unreadCount = 0;
+//     const currentUserId = 1; // Замените на реальный ID текущего пользователя
+//
+//     stompClient.connect({}, function (frame) {
+//         console.log('Connected: ' + frame);
+//         stompClient.subscribe('/topic/messages', function (message) {
+//             const msg = JSON.parse(message.body);
+//             showMessage(msg.content, msg.user.id === currentUserId);
+//         });
+//     }, function (error) {
+//         console.error('Connection error: ' + error);
+//     });
+//
+//     document.getElementById('sendMessageButton').addEventListener('click', function () {
+//         const content = document.getElementById('messageInput').value;
+//         if (content.trim()) {
+//             stompClient.send('/app/send', {}, JSON.stringify({
+//                 content: content,
+//                 chatId: 1, // Замените на реальный chatId
+//                 userId: currentUserId,
+//                 sender: 'User' // Замените на реальное имя
+//             }));
+//             document.getElementById('messageInput').value = '';
+//         }
+//     });
+//
+//     function showMessage(content, isUserMessage) {
+//         const messagesDiv = document.getElementById('messages');
+//         const messageDiv = document.createElement('div');
+//         messageDiv.className = 'message ' + (isUserMessage ? 'user-message' : 'friend-message');
+//         messageDiv.innerHTML = '<span class="sender">' + (isUserMessage ? 'Вы' : 'Друг') + '</span>' + content;
+//         messagesDiv.appendChild(messageDiv);
+//         messagesDiv.scrollTop = messagesDiv.scrollHeight;
+//         unreadCount++;
+//         document.getElementById('unreadCounter').textContent = '(' + unreadCount + ')';
+//     }
+// }
+
+
+
+
 window.onload = function () {
-    console.log("Stomp.Js: ", window.Stomp);
-    if (!window.Stomp) {
-        console.error("Stomp.js failed to load!");
+    console.log("StompJs: ", window.StompJs); // Исправлено на StompJs
+    if (!window.StompJs) { // Исправлено на StompJs
+        console.error("StompJs failed to load!"); // Исправлено сообщение
         return;
     }
 
-    const socket = new SockJS("https://my-websocket-chat-545a0987aa03.herokuapp.com");
-    const stompClient = window.Stomp.over(socket);
+    const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat'); // Исправлен эндпоинт на /chat
+    const stompClient = window.StompJs.over(socket); // Исправлено на StompJs
 
-    console.log("Stomp.Client: ", stompClient);
-
-    // const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat');
-    // const stompClient = window.Stomp.over(socket);
+    console.log("stompClient: ", stompClient); // Исправлено имя лога
 
     let unreadCount = 0;
-    const currentUserId = 1; // Замените на реальный ID текущего пользователя
+    const currentUserId = 1;
 
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/messages', function (message) {
             const msg = JSON.parse(message.body);
-            showMessage(msg.content, msg.user.id === currentUserId);
+            const isUserMessage = msg.user && msg.user.id === currentUserId;
+            showMessage(msg.content, isUserMessage);
         });
     }, function (error) {
         console.error('Connection error: ' + error);
@@ -134,9 +188,9 @@ window.onload = function () {
         if (content.trim()) {
             stompClient.send('/app/send', {}, JSON.stringify({
                 content: content,
-                chatId: 1, // Замените на реальный chatId
+                chatId: 1,
                 userId: currentUserId,
-                sender: 'User' // Замените на реальное имя
+                sender: 'User'
             }));
             document.getElementById('messageInput').value = '';
         }
@@ -152,4 +206,4 @@ window.onload = function () {
         unreadCount++;
         document.getElementById('unreadCounter').textContent = '(' + unreadCount + ')';
     }
-}
+};
