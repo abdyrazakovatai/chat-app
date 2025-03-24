@@ -155,17 +155,15 @@
 // }
 
 
-
-
 window.onload = function () {
-    console.log("StompJs: ", window.StompJs); // Исправлено на StompJs
+
+    console.log("StompJs: ", window); // Исправлено на StompJs
     if (!window.StompJs) { // Исправлено на StompJs
         console.error("StompJs failed to load!"); // Исправлено сообщение
         return;
     }
-
     const socket = new SockJS('https://my-websocket-chat-545a0987aa03.herokuapp.com/chat'); // Исправлен эндпоинт на /chat
-    const stompClient = window.StompJs.over(socket); // Исправлено на StompJs
+    const stompClient = window.Stomp.over(socket); // Исправлено на StompJs
 
     console.log("stompClient: ", stompClient); // Исправлено имя лога
 
