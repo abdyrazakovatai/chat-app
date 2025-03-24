@@ -21,6 +21,6 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE  # Выводит параметры запросов (bind values)
 
 server:
-  port: ${PORT:2929}
+  port: ${PORT:3232}
   error:
     include-message: always
