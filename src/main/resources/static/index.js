@@ -1,11 +1,5 @@
 window.onload = function () {
 
-
-
-
-
-
-
     console.log("StompJs: ", window); // Исправлено на StompJs
     if (!window.Stomp) { // Исправлено на StompJs
         console.error("StompJs failed to load!"); // Исправлено сообщение
