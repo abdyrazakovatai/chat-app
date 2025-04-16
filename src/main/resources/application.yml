@@ -10,10 +10,10 @@ spring:
       ddl-auto: update
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://jdbc:postgresql://localhost:5432/chat_app
+      username: postgres
+      password: 1234
+      driver-class-name: org.postgresql.Driver
 
 logging:
   level:
@@ -21,6 +21,6 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
 
 server:
-  port: ${PORT:3232}
+  port:
   error:
     include-message: always
